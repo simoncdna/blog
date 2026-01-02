@@ -1,6 +1,8 @@
 ---
 import ArticlePreview from "../components/ArticlePreview.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+import posts from "../../fakeDate.json";
 ---
 
 <BaseLayout>
@@ -8,18 +10,20 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 		<div class="input">$ find posts --search</div>
 
 		<ul class="articles">
-			<li>
-				<ArticlePreview title="Article-1" />
-			</li>
-			<li>
-				<ArticlePreview title="Article-2" />
-			</li>
-			<li>
-				<ArticlePreview title="Article-1" />
-			</li>
-			<li>
-				<ArticlePreview title="Article-2" />
-			</li>
+			{
+				posts.map((post) => (
+					<li>
+						<ArticlePreview
+							title={post.title}
+							description={post.description}
+							path={post.path}
+							creationDate={post.creationDate}
+							readingTime={post.readingTime}
+							tags={post.tags}
+						/>
+					</li>
+				))
+			}
 		</ul>
 	</div>
 </BaseLayout>

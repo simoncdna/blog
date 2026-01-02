@@ -1,33 +1,32 @@
 ---
 interface Props {
 	title: string;
+	description: string;
+	path: string;
+	creationDate: string;
+	readingTime: string;
+	tags: string[];
 }
 
-const { title } = Astro.props;
+const { title, description, path, creationDate, readingTime, tags } =
+	Astro.props;
 ---
 
 <article>
-	<span class="path">blog/posts/003</span>
+	<span class="path">{path}</span>
 
 	<div class="additionnal-infos">
-		<span>04-12-2025</span>
-		<span>~18min</span>
+		<span>{creationDate}</span>
+		<span>{readingTime}</span>
 	</div>
 
 	<div class="content">
-		<h2>
-			# {title}
-		</h2>
-		<p>
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi quae iste
-			nesciunt adipisci, magni id accusamus ab? Soluta magnam, temporibus
-			dignissimos et ab cum illo odit laboriosam voluptate, tenetur sint!
-		</p>
+		<h2># {title}</h2>
+		<p>{description}</p>
 	</div>
 
 	<ul class="tags">
-		<li>[javascript]</li>
-		<li>[web]</li>
+		{tags.map((tag) => <li>[{tag}]</li>)}
 	</ul>
 
 	<span class="vim">:wq to read</span>
@@ -68,6 +67,7 @@ const { title } = Astro.props;
 	article:hover {
 		border-color: var(--color-orange);
 		transition: border-color 0.15s ease;
+		cursor: pointer;
 	}
 
 	.additionnal-infos {
@@ -76,6 +76,10 @@ const { title } = Astro.props;
 		gap: 4px;
 		font-size: 12px;
 		color: var(--color-grey);
+	}
+
+	.additionnal-infos span::before {
+		content: "> ";
 	}
 
 	.content {
@@ -90,7 +94,7 @@ const { title } = Astro.props;
 	}
 
 	.content p {
-		font-size: 14px;
+		font-size: 12px;
 	}
 
 	.tags {

@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Article-1",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi quae iste nesciunt adipisci, magni id accusamus ab? Soluta magnam, temporibus dignissimos et ab cum illo odit laboriosam voluptate, tenetur sint!",
+    "path": "blog/posts/001",
+    "creationDate": "04-12-2025",
+    "readingTime": "~18min",
+    "tags": ["javascript", "web"]
+  },
+  {
+    "title": "Article-2",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi quae iste nesciunt adipisci, magni id accusamus ab? Soluta magnam, temporibus dignissimos et ab cum illo odit laboriosam voluptate, tenetur sint!",
+    "path": "blog/posts/002",
+    "creationDate": "20-12-2025",
+    "readingTime": "~18min",
+    "tags": ["rust", "learning"]
+  },
+  {
+    "title": "Article-3",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi quae iste nesciunt adipisci, magni id accusamus ab? Soluta magnam, temporibus dignissimos et ab cum illo odit laboriosam voluptate, tenetur sint!",
+    "path": "blog/posts/003",
+    "creationDate": "01-01-2026",
+    "readingTime": "~8min",
+    "tags": ["productivity"]
+  }
+]
