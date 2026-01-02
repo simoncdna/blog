@@ -1,7 +1,24 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const infos = [
+	[
+		{ property: "name", label: "Simon Cardona" },
+		{ property: "role", label: "Frontend Developer" },
+		{ property: "stack", label: ["Next.js", "Rust", "Neovim", "React"] },
+		{ property: "location", label: "Toulouse, France" },
+		{ property: "description", label: "Terminal enthousiaste" },
+	],
+	[],
+];
 ---
 
 <BaseLayout>
-	<h2>About</h2>
+	<span class="page-command">$ whoami</span>
 </BaseLayout>
+
+<style>
+	.page-command {
+		color: var(--color-grey);
+	}
+</style>

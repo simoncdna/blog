@@ -1,33 +1,35 @@
 ---
-import Logo from '/public/logo_blog.svg?raw';
+import Logo from "/public/logo_blog.svg?raw";
 
-	const navigation = [
-    { label: 'Home', href: '/' },
-    { label: 'Category', href: '/category' },
-		{ label: 'Source', href: 'https://github.com/simoncdn/blog', external: true },
-    { label: 'RSS', href: '/rss' },
-    { label: 'About', href: '/about' },
-    { label: 'Github', href: 'https://github.com/simoncdn', external: true },
-  ];
+const navigation = [
+	{ label: "Home", href: "/" },
+	{ label: "Category", href: "/category" },
+	{ label: "Source", href: "https://github.com/simoncdn/blog", external: true },
+	{ label: "RSS", href: "/rss" },
+	{ label: "About", href: "/about" },
+	{ label: "Github", href: "https://github.com/simoncdn", external: true },
+];
 
-	const currentPath = Astro.url.pathname;
+const currentPath = Astro.url.pathname;
 ---
 
 <header>
 	<div class="logo" set:html={Logo} />
 	<nav>
 		<ul>
-			{navigation.map((nav) => (
-				<li>
-					<a 
-						href={nav.href}
-						target={nav.external ? '_blank' : undefined}
-						class={currentPath === nav.href ? 'active' : ''}
+			{
+				navigation.map((nav) => (
+					<li>
+						<a
+							href={nav.href}
+							target={nav.external ? "_blank" : undefined}
+							class={currentPath === nav.href ? "active" : ""}
 						>
-						{nav.label}
-					</a>
-				</li>
-			))}
+							{nav.label}
+						</a>
+					</li>
+				))
+			}
 		</ul>
 	</nav>
 </header>
@@ -71,11 +73,11 @@ import Logo from '/public/logo_blog.svg?raw';
 	}
 
 	a::before {
-		content: '> ';
+		content: "> ";
 	}
 
 	a.active::before {
-		content: '$ ';
+		content: "$ ";
 	}
 
 	a:hover:not(.active) {
@@ -87,5 +89,4 @@ import Logo from '/public/logo_blog.svg?raw';
 		color: var(--color-orange);
 		cursor: default;
 	}
-
 </style>
