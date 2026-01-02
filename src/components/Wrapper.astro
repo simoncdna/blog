@@ -5,9 +5,7 @@ import Footer from "../components/Footer.astro";
 
 <div class="wrapper">
 	<Header />
-	<div class="slot-wrapper">
-		<slot class="slot" />
-	</div>
+	<slot />
 	<Footer />
 </div>
 
@@ -21,13 +19,5 @@ import Footer from "../components/Footer.astro";
 		min-height: 100vh;
 		padding: 72px 280px;
 		gap: 64px;
-	}
-
-	.slot-wrapper {
-		flex: 1;
-	}
-
-	.slot {
-		flex: 1;
 	}
 </style>

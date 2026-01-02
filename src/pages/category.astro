@@ -3,5 +3,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout>
-	<h2>Category</h2>
+	<span class="page-command">$ ls -la ~/blog/categories/</span>
 </BaseLayout>
+
+<style>
+	.page-command {
+		color: var(--color-grey);
+	}
+</style>

@@ -1,8 +1,56 @@
 ---
+import ArticlePreview from "../components/ArticlePreview.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout>
-	<h2>Hello world</h2>
-	<h2>0123456789</h2>
+	<div class="content">
+		<div class="input">$ find posts --search</div>
+
+		<ul class="articles">
+			<li>
+				<ArticlePreview title="Article-1" />
+			</li>
+			<li>
+				<ArticlePreview title="Article-2" />
+			</li>
+			<li>
+				<ArticlePreview title="Article-1" />
+			</li>
+			<li>
+				<ArticlePreview title="Article-2" />
+			</li>
+		</ul>
+	</div>
 </BaseLayout>
+
+<style>
+	.content {
+		display: flex;
+		flex-direction: column;
+		gap: 24px;
+		flex: 1;
+		width: 100%;
+	}
+
+	.input {
+		display: flex;
+		border: 1px solid var(--color-grey);
+		border-radius: 6px;
+		color: var(--color-grey);
+		width: calc(50% - 10px);
+		font-size: 14px;
+		padding: 4px 8px;
+		align-self: self-end;
+	}
+
+	.articles {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 20px;
+	}
+
+	.articles li {
+		list-style-type: none;
+	}
+</style>

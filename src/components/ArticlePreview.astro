@@ -1,0 +1,127 @@
+---
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<article>
+	<span class="path">blog/posts/003</span>
+
+	<div class="additionnal-infos">
+		<span>04-12-2025</span>
+		<span>~18min</span>
+	</div>
+
+	<div class="content">
+		<h2>
+			# {title}
+		</h2>
+		<p>
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi quae iste
+			nesciunt adipisci, magni id accusamus ab? Soluta magnam, temporibus
+			dignissimos et ab cum illo odit laboriosam voluptate, tenetur sint!
+		</p>
+	</div>
+
+	<ul class="tags">
+		<li>[javascript]</li>
+		<li>[web]</li>
+	</ul>
+
+	<span class="vim">:wq to read</span>
+</article>
+
+<style>
+	.path {
+		position: absolute;
+		top: -9px;
+		left: 14;
+		font-size: 12px;
+		z-index: 10;
+	}
+
+	.path::before {
+		content: " ";
+		position: absolute;
+		z-index: -1;
+		background-color: var(--color-black);
+		width: 110%;
+		height: 1px;
+		top: 50%;
+		left: -5%;
+	}
+
+	article {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		border: 1px solid var(--color-grey);
+		background-color: #282828;
+		padding: 16px 14px;
+		border-radius: 6px;
+		gap: 32px;
+	}
+
+	article:hover {
+		border-color: var(--color-orange);
+		transition: border-color 0.15s ease;
+	}
+
+	.additionnal-infos {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+		font-size: 12px;
+		color: var(--color-grey);
+	}
+
+	.content {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+		flex: 1;
+	}
+
+	.content p {
+		font-size: 14px;
+	}
+
+	.tags {
+		display: flex;
+		gap: 4px;
+		color: var(--color-grey);
+		font-size: 12px;
+	}
+
+	.tags li {
+		list-style: none;
+	}
+
+	.vim {
+		position: absolute;
+		bottom: -7px;
+		right: 14px;
+		font-size: 12px;
+		z-index: 10;
+		opacity: 0;
+		transition: opacity 0.15s ease;
+	}
+
+	article:hover .vim {
+		opacity: 1;
+	}
+
+	.vim::before {
+		content: " ";
+		position: absolute;
+		z-index: -1;
+		background-color: var(--color-black);
+		width: 110%;
+		height: 1px;
+		bottom: 38%;
+		right: -5%;
+	}
+</style>
