@@ -1,5 +1,7 @@
 ---
- const navigation = [
+import Logo from '/public/logo_blog.svg?raw';
+
+	const navigation = [
     { label: 'Home', href: '/' },
     { label: 'Category', href: '/category' },
 		{ label: 'Source', href: 'https://github.com/simoncdn/blog', external: true },
@@ -8,13 +10,11 @@
     { label: 'Github', href: 'https://github.com/simoncdn', external: true },
   ];
 
-const currentPath = Astro.url.pathname;
+	const currentPath = Astro.url.pathname;
 ---
 
 <header>
-	<div class="logo">
-		<img src="logo_blog.svg" alt="logo-blog" />
-	</div>
+	<div class="logo" set:html={Logo} />
 	<nav>
 		<ul>
 			{navigation.map((nav) => (
@@ -41,11 +41,22 @@ const currentPath = Astro.url.pathname;
 		width: 100%;
 	}
 
+	.logo {
+		color: var(--color-white);
+		width: 300px;
+		height: auto;
+	}
+
+	.logo svg {
+		width: 100%;
+		height: 100%;
+	}
+
 	ul {
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
 		gap: 28px;
-		font-size: 20px;
+		font-size: 16px;
 	}
 
 	li {
