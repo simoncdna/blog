@@ -15,4 +15,6 @@
 
 body {
 	background-color: var(--color-black);
+	color: var(--color-white);
+	font-family: 'IBM Plex Mono', monospace;
 }

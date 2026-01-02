@@ -1,0 +1,33 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<div class="wrapper">
+	<Header />
+	<div class="slot-wrapper">
+		<slot class="slot"/>
+	</div>
+	<Footer />
+</div>
+
+<style>
+	.wrapper {
+		display: flex;
+		flex-direction: column;
+		justify-content: start;
+		align-items: start;
+		width: 100%;
+		min-height: 100vh;
+		padding: 72px 220px;
+		gap: 128px;
+	}
+
+	.slot-wrapper {
+		flex: 1;
+	}
+
+	.slot {
+		flex: 1;
+	}
+</style>
