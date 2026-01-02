@@ -18,3 +18,7 @@ body {
   color: var(--color-white);
   font-family: "IBM Plex Mono", monospace;
 }
+
+li {
+  list-style-type: none;
+}
