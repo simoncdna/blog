@@ -1,5 +1,6 @@
 ---
 interface Props {
+	id: number;
 	title: string;
 	description: string;
 	path: string;
@@ -8,28 +9,30 @@ interface Props {
 	tags: string[];
 }
 
-const { title, description, path, creationDate, readingTime, tags } =
+const { id, title, description, path, creationDate, readingTime, tags } =
 	Astro.props;
 ---
 
 <article>
-	<span class="path">{path}</span>
+	<a class="post" href={`/posts/${id}`}>
+		<span class="path">{path}</span>
 
-	<div class="additionnal-infos">
-		<span>{creationDate}</span>
-		<span>{readingTime}</span>
-	</div>
+		<div class="additionnal-infos">
+			<span>{creationDate}</span>
+			<span>{readingTime}</span>
+		</div>
 
-	<div class="content">
-		<h2># {title}</h2>
-		<p>{description}</p>
-	</div>
+		<div class="content">
+			<h2># {title}</h2>
+			<p>{description}</p>
+		</div>
 
-	<ul class="tags">
-		{tags.map((tag) => <li>[{tag}]</li>)}
-	</ul>
+		<ul class="tags">
+			{tags.map((tag) => <li>[{tag}]</li>)}
+		</ul>
 
-	<span class="vim">:wq to read</span>
+		<span class="vim">:wq to read</span>
+	</a>
 </article>
 
 <style>
@@ -52,7 +55,7 @@ const { title, description, path, creationDate, readingTime, tags } =
 		left: -5%;
 	}
 
-	article {
+	.post {
 		position: relative;
 		display: flex;
 		flex-direction: column;
@@ -64,8 +67,9 @@ const { title, description, path, creationDate, readingTime, tags } =
 		gap: 32px;
 	}
 
-	article:hover {
+	.post:hover {
 		border-color: var(--color-orange);
+		color: var(--color-white);
 		transition: border-color 0.15s ease;
 		cursor: pointer;
 	}
@@ -114,7 +118,7 @@ const { title, description, path, creationDate, readingTime, tags } =
 		transition: opacity 0.15s ease;
 	}
 
-	article:hover .vim {
+	.post:hover .vim {
 		opacity: 1;
 	}
 

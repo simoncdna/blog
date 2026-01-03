@@ -50,3 +50,11 @@ export async function getPostsByTag(tag: string, options: PostsOptions = {}) {
 
   return posts;
 }
+
+export async function getPostById(id: number) {
+  const post = await getCollection("posts", ({ data }) => {
+    return data.id === id;
+  });
+
+  return post;
+}

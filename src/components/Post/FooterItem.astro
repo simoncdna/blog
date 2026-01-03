@@ -1,0 +1,27 @@
+---
+interface Props {
+	id: number;
+	title: string;
+}
+
+const { id, title } = Astro.props;
+---
+
+<a class="link" href={`/posts/${id}`}>cat ../{title}.md </a>
+
+<style>
+	.link {
+		font-size: 12px;
+		color: var(--color-grey);
+		transition: color 0.15s ease;
+	}
+
+	.link:hover {
+		color: var(--color-orange);
+		transition: color 0.15s ease;
+	}
+
+	.link::before {
+		content: "> ";
+	}
+</style>

@@ -1,0 +1,46 @@
+---
+interface Props {
+	date: string;
+	readingTime: string;
+	tags: string[];
+}
+
+const { date, readingTime, tags } = Astro.props;
+---
+
+<div class="frontmatter">
+	<span>---</span>
+	<div class="info-wrapper">
+		<span>Date: </span>
+		<span>{date}</span>
+	</div>
+	<div class="info-wrapper">
+		<span>Readtime: </span>
+		<span>{readingTime}</span>
+	</div>
+	<div class="info-wrapper">
+		<span>Tags: </span>
+		<ul class="tags">{tags.map((tag) => <li>[{tag}]</li>)}</ul>
+	</div>
+	<span>---</span>
+</div>
+
+<style>
+	.frontmatter {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+		font-size: 12px;
+		color: var(--color-grey);
+	}
+
+	.info-wrapper {
+		display: flex;
+		align-items: center;
+		gap: 4px;
+	}
+
+	.tags {
+		display: flex;
+	}
+</style>

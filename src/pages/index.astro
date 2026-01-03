@@ -22,6 +22,7 @@ const posts = await getAllPosts();
 				posts.map(({ data, body }) => (
 					<li>
 						<ArticlePreview
+							id={data.id}
 							title={data.title}
 							description={data.description}
 							path={getArticlePath(data.id)}

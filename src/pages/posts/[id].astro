@@ -1,0 +1,71 @@
+---
+import { getAllPosts } from "../../lib/posts";
+import PostLayout from "../../layouts/PostLayout.astro";
+import { getFormattedDate } from "../../lib/getFormattedDate";
+import { getReadingTime } from "../../lib/getReadingTime";
+import Header from "../../components/Post/Header.astro";
+import Footer from "../../components/Post/Footer.astro";
+import Frontmatter from "../../components/Post/Frontmatter.astro";
+import { render } from "astro:content";
+import FooterItem from "../../components/Post/FooterItem.astro";
+
+export async function getStaticPaths() {
+	const posts = await getAllPosts();
+
+	return posts.map((post, index) => ({
+		params: { id: post.data.id },
+		props: {
+			post,
+			prevPost: posts[index - 1] ?? null,
+			nextPost: posts[index + 1] ?? null,
+		},
+	}));
+}
+
+const { post, prevPost, nextPost } = Astro.props;
+const { Content } = await render(post);
+---
+
+<PostLayout>
+	<div class="content-wrapper">
+		<Header title={post.data.title} />
+		<Frontmatter
+			date={getFormattedDate(post.data.creationDate)}
+			readingTime={getReadingTime(post.body)}
+			tags={post.data.tags}
+		/>
+		<Content />
+
+		<span class="end-of-file">EOF</span>
+
+		<Footer>
+			{
+				prevPost && (
+					<FooterItem id={prevPost.data.id} title={prevPost.data.title} />
+				)
+			}
+			{
+				nextPost && (
+					<FooterItem id={nextPost.data.id} title={nextPost.data.title} />
+				)
+			}
+		</Footer>
+	</div>
+</PostLayout>
+
+<style>
+	.content-wrapper {
+		display: flex;
+		flex-direction: column;
+		justify-content: start;
+		align-items: start;
+		width: 100%;
+		min-height: 100vh;
+		padding: 72px 280px;
+		gap: 32px;
+	}
+
+	.end-of-file::before {
+		content: "> ";
+	}
+</style>
