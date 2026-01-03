@@ -1,0 +1,107 @@
+---
+/**
+ * Terminal-style typing animation component.
+ * Displays text character by character with a blinking cursor.
+ *
+ * @example
+ * <TypeWriter text="whoami" revealTarget="#info-wrapper" />
+ */
+interface Props {
+	/** Text to type (without the "$ " prefix which is added automatically) */
+	text: string;
+	/** Delay in ms before starting the animation (default: 0) */
+	delay?: number;
+	/** CSS class to apply to the wrapper */
+	class?: string;
+	/** HTML id for targeting with revealTarget */
+	id?: string;
+	/** CSS selector of element to reveal (removes .hidden class) when animation completes */
+	revealTarget?: string;
+}
+
+const {
+	text,
+	delay = 0,
+	class: className = "",
+	id,
+	revealTarget,
+} = Astro.props;
+---
+
+<script>
+	import { ANIMATION_TYPING_SPEED } from "../constants";
+
+	function initTypewriters() {
+		const typewriters = document.querySelectorAll<HTMLElement>(
+			"[data-typewriter]:not([data-initialized])",
+		);
+
+		typewriters.forEach(async (el) => {
+			el.setAttribute("data-initialized", "true");
+
+			const text = el.dataset.text || "";
+			const delay = parseInt(el.dataset.delay || "0");
+			const revealTarget = el.dataset.revealTarget;
+			const textEl = el.querySelector(".typewriter-text");
+
+			if (delay > 0) {
+				await new Promise((r) => setTimeout(r, delay));
+			}
+
+			if (textEl) {
+				for (let i = 0; i < text.length; i++) {
+					textEl.textContent += text[i];
+					await new Promise((r) => setTimeout(r, ANIMATION_TYPING_SPEED));
+				}
+			}
+
+			const cursorEl = el.querySelector(".typewriter-cursor");
+			if (cursorEl) {
+				cursorEl.remove();
+			}
+
+			if (revealTarget) {
+				const target = document.querySelector(revealTarget);
+				target?.classList.remove("hidden");
+			}
+
+			el.dispatchEvent(new CustomEvent("typewriter:done", { bubbles: true }));
+		});
+	}
+
+	document.addEventListener("astro:page-load", initTypewriters);
+</script>
+
+<span
+	class={className}
+	data-typewriter
+	data-text={text}
+	data-delay={delay}
+	data-reveal-target={revealTarget}
+	id={id}
+>
+	<span class="typewriter-text">$ </span><span class="typewriter-cursor">_</span
+	>
+</span>
+
+<style>
+	.typewriter-text {
+		color: var(--color-grey);
+	}
+
+	.typewriter-cursor {
+		animation: blink 0.7s infinite;
+		color: var(--color-grey);
+	}
+
+	@keyframes blink {
+		0%,
+		50% {
+			opacity: 1;
+		}
+		51%,
+		100% {
+			opacity: 0;
+		}
+	}
+</style>

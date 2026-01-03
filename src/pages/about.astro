@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { LINKEDIN_URL, GITHUB_URL, EMAIL } from "../constants.ts";
+import TypeWriter from "../components/TypeWriter.astro";
 
 const baseInfos = [
 	{ label: "name", value: "Simon Cardona" },
@@ -32,63 +33,63 @@ const socials = [
 
 <BaseLayout>
 	<div class="content-wrapper">
-		<span class="page-command">$ whoami</span>
+		<TypeWriter text="whoami" revealTarget="#content" />
 
-		<ul class="infos-list">
-			{
-				baseInfos.map((info) => (
-					<li class="info">
-						<span>{info.label}</span>
-						<span>{info.value}</span>
-					</li>
-				))
-			}
-		</ul>
+		<div id="content" class="content fade hidden">
+			<ul class="info-list">
+				{
+					baseInfos.map((info) => (
+						<li class="info">
+							<span>{info.label}</span>
+							<span>{info.value}</span>
+						</li>
+					))
+				}
+			</ul>
 
-		<ul class="infos-list">
-			<div class="projects">
-				<span>projects</span>
-				<ul class="projects-list">
-					{
-						projects.map((project) => (
-							<li class="project">
-								<a href={project.url} target="_blank">
-									{project.name}
-								</a>
-							</li>
-						))
-					}
-				</ul>
-			</div>
-			{
-				socials.map((social) => (
-					<li class="info">
-						<span>{social.label}</span>
-						<a href={social.url} target="_blank">
-							{social.value}
-						</a>
-					</li>
-				))
-			}
-		</ul>
+			<ul class="info-list">
+				<div class="info">
+					<span>projects</span>
+					<ul class="projects-list">
+						{
+							projects.map((project) => (
+								<li class="project">
+									<a href={project.url} target="_blank">
+										{project.name}
+									</a>
+								</li>
+							))
+						}
+					</ul>
+				</div>
+				{
+					socials.map((social) => (
+						<li class="info">
+							<span>{social.label}</span>
+							<a href={social.url} target="_blank">
+								{social.value}
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</div>
 	</div>
 </BaseLayout>
 
 <style>
-	.content-wrapper {
+	.content-wrapper,
+	.content {
 		display: flex;
 		flex-direction: column;
 		justify-content: start;
 		align-items: start;
 		height: 100%;
+		flex: 1;
 		gap: 32px;
 	}
 
-	.page-command {
-		color: var(--color-grey);
-	}
-
-	.infos-list {
+	.info-list {
 		display: grid;
 		grid-template-columns: 120px 1fr;
 		max-width: 70%;
@@ -96,15 +97,10 @@ const socials = [
 
 	.info {
 		display: contents;
-		background-color: red;
 	}
 
 	.info a {
 		width: fit-content;
-	}
-
-	.projects {
-		display: contents;
 	}
 
 	.projects-list {

@@ -1,22 +1,10 @@
+/* Reset */
 *,
 ::after,
 ::before {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-:root {
-  --color-black: #1a1a1a;
-  --color-white: #f9f6f1;
-  --color-grey: #616161;
-  --color-orange: #f2a83b;
-}
-
-body {
-  background-color: var(--color-black);
-  color: var(--color-white);
-  font-family: "IBM Plex Mono", monospace;
 }
 
 li {
@@ -26,10 +14,39 @@ li {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+/* Variables */
+:root {
+  --color-black: #1a1a1a;
+  --color-white: #f9f6f1;
+  --color-grey: #616161;
+  --color-orange: #f2a83b;
+}
+
+/* Base */
+body {
+  background-color: var(--color-black);
+  color: var(--color-white);
+  font-family: "IBM Plex Mono", monospace;
+}
+
+a {
   transition: color 0.15s ease;
 }
 
 a:hover {
   color: var(--color-grey);
   transition: color 0.15s ease;
+}
+
+/* Fade animation utility */
+.fade {
+  opacity: 1;
+  transition: opacity 0.15s ease;
+}
+
+.fade.hidden {
+  cursor: default;
+  opacity: 0;
 }

@@ -1,0 +1,68 @@
+---
+import TypeWriter from "../components/TypeWriter.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getAllTags } from "../lib/posts";
+
+const tags = await getAllTags();
+---
+
+<BaseLayout>
+	<div class="content-wrapper">
+		<TypeWriter id="typewriter" text="ls -la ~/blog/categories" revealTarget="#content" />
+
+		<div id="content" class="content fade hidden">
+			<ul>
+				{
+					tags.map((tag) => (
+						<li>
+							<a class="category" href=`/categories/${tag.name}`>
+							<span>drwxr-xr-x</span>
+							<span>{tag.name}/</span>
+							<span>({tag.count})</span>
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</div>
+</BaseLayout>
+
+<style>
+	.content-wrapper {
+		display: flex;
+		flex-direction: column;
+		gap: 32px;
+		flex: 1;
+		width: 100%;
+	}
+
+	.content {
+		display: flex;
+		flex-direction: column;
+		gap: 24px;
+		width: fit-content;
+	}
+
+	.command-wrapper {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+	}
+
+	.category {
+		position: relative;
+		display: grid;
+		grid-template-columns: repeat(3, 150px);
+		cursor: pointer;
+		gap: 16px;
+	}
+
+	.category:hover::before {
+		content-wrapper: "> ";
+		color: var(--color-grey);
+		position: absolute;
+		left: -18px;
+	}
+
+</style>
