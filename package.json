@@ -11,7 +11,9 @@
 	},
 	"dependencies": {
 		"@fontsource/ibm-plex-mono": "^5.2.7",
-		"astro": "^5.16.6"
+		"astro": "^5.16.6",
+		"astro-pagefind": "^1.8.5",
+		"reading-time": "^1.5.0"
 	},
 	"devDependencies": {
 		"@typescript-eslint/parser": "^8.51.0",

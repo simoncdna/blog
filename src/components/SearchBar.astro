@@ -1,0 +1,47 @@
+---
+
+---
+
+<label for="search-input" class="input-wrapper">
+	<span>$ find posts --search </span>
+	<input id="search-input" type="search" />
+</label>
+
+<style>
+	.input-wrapper {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		border: 1px solid var(--color-grey);
+		border-radius: 6px;
+		color: var(--color-grey);
+		width: calc(50% - 10px);
+		font-size: 14px;
+		padding: 10px 8px;
+		align-self: self-end;
+		transition: all 0.15s ease;
+	}
+
+	.input-wrapper:hover,
+	.input-wrapper:focus-within {
+		border-color: var(--color-white);
+		color: var(--color-white);
+		transition: all 0.15s ease;
+	}
+
+	input {
+		background-color: transparent;
+		border: none;
+		outline: none;
+		color: var(--color-grey);
+		flex: 1;
+		transition: all 0.15s ease;
+		caret-shape: block;
+	}
+
+	.input-wrapper:hover input,
+	input:focus {
+		color: var(--color-white);
+		transition: all 0.15s ease;
+	}
+</style>
