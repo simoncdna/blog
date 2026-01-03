@@ -12,7 +12,9 @@ export async function getAllPosts(options: PostsOptions = {}) {
     return options.withDraft || !data.draft;
   });
 
-  return posts;
+  return posts.sort(
+    (a, b) => b.data.creationDate.getTime() - a.data.creationDate.getTime()
+  );
 }
 
 type Tag = { name: string; count: number };

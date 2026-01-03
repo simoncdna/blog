@@ -16,8 +16,8 @@ export async function getStaticPaths() {
 		params: { id: post.data.id },
 		props: {
 			post,
-			prevPost: posts[index - 1] ?? null,
-			nextPost: posts[index + 1] ?? null,
+			prevPost: posts[index + 1] ?? null,
+			nextPost: posts[index - 1] ?? null,
 		},
 	}));
 }
@@ -40,8 +40,10 @@ const { Content } = await render(post);
 
 		<Footer>
 			{
-				prevPost && (
+				prevPost ? (
 					<FooterItem id={prevPost.data.id} title={prevPost.data.title} />
+				) : (
+					<span />
 				)
 			}
 			{
