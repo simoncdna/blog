@@ -1,24 +1,123 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { LINKEDIN_URL, GITHUB_URL, EMAIL } from "../constants.ts";
 
-const infos = [
-	[
-		{ property: "name", label: "Simon Cardona" },
-		{ property: "role", label: "Frontend Developer" },
-		{ property: "stack", label: ["Next.js", "Rust", "Neovim", "React"] },
-		{ property: "location", label: "Toulouse, France" },
-		{ property: "description", label: "Terminal enthousiaste" },
-	],
-	[],
-];
+const baseInfos = [
+	{ label: "name", value: "Simon Cardona" },
+	{ label: "role", value: "Frontend Developer" },
+	{ label: "tech", value: "React / Next.js / Vue / Rust / Neovim" },
+	{ label: "location", value: "Toulouse, France" },
+	{
+		label: "description",
+		value:
+			"Terminal enthusiast. As my co-workers say, I'm a curious frontend dev — I love exploring things beyond my job tasks.",
+	},
+] as const;
+
+const projects = [
+	{ name: "Lazytasks", url: `${GITHUB_URL}/lazytasks` },
+	{ name: "next-plugin-qrcode", url: `${GITHUB_URL}/next-plugin-qrcode` },
+] as const;
+
+const socials = [
+	{
+		label: "contact",
+		value: "simon.cdna-pro@proton.me",
+		url: `mailto:${EMAIL}`,
+	},
+	{ label: "github", value: "github/simoncdn", url: GITHUB_URL },
+	{ label: "linkedin", value: "in/simoncdn", url: LINKEDIN_URL },
+] as const;
 ---
 
 <BaseLayout>
-	<span class="page-command">$ whoami</span>
+	<div class="content-wrapper">
+		<span class="page-command">$ whoami</span>
+
+		<ul class="infos-list">
+			{
+				baseInfos.map((info) => (
+					<li class="info">
+						<span>{info.label}</span>
+						<span>{info.value}</span>
+					</li>
+				))
+			}
+		</ul>
+
+		<ul class="infos-list">
+			<div class="projects">
+				<span>projects</span>
+				<ul class="projects-list">
+					{
+						projects.map((project) => (
+							<li class="project">
+								<a href={project.url} target="_blank">
+									{project.name}
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</div>
+			{
+				socials.map((social) => (
+					<li class="info">
+						<span>{social.label}</span>
+						<a href={social.url} target="_blank">
+							{social.value}
+						</a>
+					</li>
+				))
+			}
+		</ul>
+	</div>
 </BaseLayout>
 
 <style>
+	.content-wrapper {
+		display: flex;
+		flex-direction: column;
+		justify-content: start;
+		align-items: start;
+		height: 100%;
+		gap: 32px;
+	}
+
 	.page-command {
 		color: var(--color-grey);
+	}
+
+	.infos-list {
+		display: grid;
+		grid-template-columns: 120px 1fr;
+		max-width: 70%;
+	}
+
+	.info {
+		display: contents;
+		background-color: red;
+	}
+
+	.info a {
+		width: fit-content;
+	}
+
+	.projects {
+		display: contents;
+	}
+
+	.projects-list {
+		display: flex;
+		gap: 8px;
+	}
+
+	.project {
+		display: flex;
+	}
+
+	.project:not(:last-child)::after {
+		content: "•";
+		margin-left: 8px;
 	}
 </style>
