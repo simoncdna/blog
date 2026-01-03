@@ -5,14 +5,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { getArticlePath } from "../lib/getArticlePath";
 import { getFormattedDate } from "../lib/getFormattedDate";
 
-import { getCollection } from "astro:content";
+import { getAllPosts } from "../lib/posts";
 import { getReadingTime } from "../lib/getReadingTime";
 
 import SearchBar from "../components/SearchBar.astro";
 
-const posts = await getCollection("posts", ({ data }) => {
-	return data.draft !== true;
-});
+const posts = await getAllPosts();
 ---
 
 <BaseLayout>
