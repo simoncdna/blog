@@ -25,7 +25,7 @@ const t = useTranslations(lang);
 const posts = await getAllPosts({ lang });
 ---
 
-<BaseLayout>
+<BaseLayout title={t("nav.home")}>
 	<div class="content">
 		<SearchBar />
 

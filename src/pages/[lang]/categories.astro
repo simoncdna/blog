@@ -2,7 +2,7 @@
 import TypeWriter from "../../components/TypeWriter.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getAllTags } from "../../lib/posts";
-import { getLang, getLocalizedPath } from "../../i18n/utils";
+import { getLang, getLocalizedPath, useTranslations } from "../../i18n/utils";
 import { locales } from "../../i18n/config";
 
 export function getStaticPaths() {
@@ -13,11 +13,12 @@ export function getStaticPaths() {
 }
 
 const lang = getLang(Astro.params.lang);
+const t = useTranslations(lang);
 
 const tags = await getAllTags({ lang });
 ---
 
-<BaseLayout>
+<BaseLayout title={t("nav.categories")}>
 	<div class="content-wrapper">
 		<TypeWriter
 			id="typewriter"

@@ -36,7 +36,7 @@ const { lang } = Astro.params;
 const { Content } = await render(post);
 ---
 
-<PostLayout>
+<PostLayout title={post.data.title} description={post.data.description}>
 	<div class="content-wrapper">
 		<Header fileName={getPostSlug(post.id, lang)} />
 		<Frontmatter
