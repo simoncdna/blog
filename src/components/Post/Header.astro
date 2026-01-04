@@ -1,14 +1,14 @@
 ---
 interface Props {
-	title: string;
+	fileName: string;
 }
 
-const { title } = Astro.props;
+const { fileName } = Astro.props;
 ---
 
 <header class="header">
 	<a class="link" href="/">cd ..</a>
-	<span>blog/posts/{title}.md</span>
+	<span>blog/posts/{fileName}.md</span>
 </header>
 
 <style>

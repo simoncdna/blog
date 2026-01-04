@@ -1,13 +1,13 @@
 ---
 interface Props {
 	id: number;
-	title: string;
+	fileName: string;
 }
 
-const { id, title } = Astro.props;
+const { id, fileName } = Astro.props;
 ---
 
-<a class="link" href={`/posts/${id}`}>cat ../{title}.md </a>
+<a class="link" href={`/posts/${id}`}>cat ../{fileName}.md </a>
 
 <style>
 	.link {
