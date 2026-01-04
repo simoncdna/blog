@@ -16,7 +16,7 @@ const linkURL = getLocalizedPath(lang, `/posts/${id}`);
 
 <style>
 	.link {
-		font-size: 0.75rem;
+		font-size: 0.875rem;
 		color: var(--color-grey);
 		transition: color 0.15s ease;
 	}
@@ -28,5 +28,12 @@ const linkURL = getLocalizedPath(lang, `/posts/${id}`);
 
 	.link::before {
 		content: "> ";
+	}
+
+	/* Desktop MD */
+	@media (max-width: 768px) {
+		.link {
+			font-size: 0.75rem;
+		}
 	}
 </style>

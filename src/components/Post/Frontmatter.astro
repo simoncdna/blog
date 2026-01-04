@@ -30,7 +30,7 @@ const { date, readingTime, tags } = Astro.props;
 		display: flex;
 		flex-direction: column;
 		gap: 4px;
-		font-size: 0.75rem;
+		font-size: 0.875rem;
 		color: var(--color-grey);
 	}
 
@@ -42,5 +42,12 @@ const { date, readingTime, tags } = Astro.props;
 
 	.tags {
 		display: flex;
+	}
+
+	/* Desktop MD */
+	@media (max-width: 768px) {
+		.frontmatter {
+			font-size: 0.75rem;
+		}
 	}
 </style>
