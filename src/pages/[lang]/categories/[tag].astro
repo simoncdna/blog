@@ -1,22 +1,32 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
-import { getFormattedDate } from "../../lib/getFormattedDate";
-import { getAllTags, getPostsByTag } from "../../lib/posts";
-import TypeWriter from "../../components/TypeWriter.astro";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { getFormattedDate } from "../../../lib/getFormattedDate";
+import { getAllTags, getPostsByTag } from "../../../lib/posts";
+import TypeWriter from "../../../components/TypeWriter.astro";
 
-import { ANIMATION_TYPING_SPEED } from "../../constants";
+import { ANIMATION_TYPING_SPEED } from "../../../constants";
+import { getLang, getLocalizedPath, getPostSlug } from "../../../i18n/utils";
+import { locales } from "../../../i18n/config";
 
 export async function getStaticPaths() {
-	const tags = await getAllTags();
+	const params = await Promise.all(
+		locales.map(async (lang) => {
+			const tags = await getAllTags({ lang });
 
-	return tags.map((tag) => ({
-		params: { tag: tag.name },
-	}));
+			return tags.map((tag) => ({
+				params: { lang, tag: tag.name },
+			}));
+		}),
+	);
+
+	return params.flat();
 }
 
 const { tag: currentTag } = Astro.params;
-const tags = await getAllTags();
-const posts = await getPostsByTag(currentTag);
+const lang = getLang(Astro.params.lang);
+
+const tags = await getAllTags({ lang });
+const posts = await getPostsByTag(currentTag, { lang });
 
 const MARGIN = 400;
 const firstText = `cd ${currentTag}/`;
@@ -37,7 +47,7 @@ const secondDelay = firstText.length * ANIMATION_TYPING_SPEED + MARGIN;
 									"terminal-row",
 									{ "is-active": tag.name === currentTag },
 								]}
-								href={`/categories/${tag.name}`}
+								href={getLocalizedPath(lang, `/categories/${tag.name}`)}
 							>
 								<span>drwxr-xr-x</span>
 								<span>{tag.name}/</span>
@@ -63,12 +73,15 @@ const secondDelay = firstText.length * ANIMATION_TYPING_SPEED + MARGIN;
 				{
 					posts.map((post) => (
 						<li>
-							<a class="terminal-row" href={`/posts/${post.data.id}`}>
+							<a
+								class="terminal-row"
+								href={getLocalizedPath(lang, `/posts/${post.data.id}`)}
+							>
 								<span>-rw-r--r--</span>
 								<span class="file-date">
 									{getFormattedDate(post.data.creationDate)}
 								</span>
-								<span>{post.id}.md</span>
+								<span>{getPostSlug(post.id, lang)}.md</span>
 							</a>
 						</li>
 					))

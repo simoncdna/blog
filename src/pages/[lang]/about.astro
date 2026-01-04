@@ -1,17 +1,28 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import { LINKEDIN_URL, GITHUB_URL, EMAIL } from "../constants.ts";
-import TypeWriter from "../components/TypeWriter.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { LINKEDIN_URL, GITHUB_URL, EMAIL } from "../../constants.ts";
+import TypeWriter from "../../components/TypeWriter.astro";
+import { getLang, useTranslations } from "../../i18n/utils";
+import { locales } from "../../i18n/config";
+
+export function getStaticPaths() {
+	const params = locales.map((local) => {
+		return { params: { lang: local } };
+	});
+	return params;
+}
+
+const lang = getLang(Astro.params.lang);
+const t = useTranslations(lang);
 
 const baseInfos = [
 	{ label: "name", value: "Simon Cardona" },
-	{ label: "role", value: "Frontend Developer" },
+	{ label: "role", value: t("about.info.role") },
 	{ label: "tech", value: "React / Next.js / Vue / Rust / Neovim" },
 	{ label: "location", value: "Toulouse, France" },
 	{
 		label: "description",
-		value:
-			"Terminal enthusiast. As my co-workers say, I'm a curious frontend dev — I love exploring things beyond my job tasks.",
+		value: t("about.info.description"),
 	},
 ] as const;
 

@@ -1,17 +1,21 @@
 ---
 import Logo from "/public/logo_blog.svg?raw";
 import { GITHUB_URL, GITHUB_BLOG_URL } from "../constants.ts";
-
-const navigation = [
-	{ label: "Home", href: "/" },
-	{ label: "Categories", href: "/categories" },
-	{ label: "Source", href: GITHUB_BLOG_URL, external: true },
-	{ label: "RSS", href: "/rss" },
-	{ label: "About", href: "/about" },
-	{ label: "Github", href: GITHUB_URL, external: true },
-];
+import { getLang, getLocalizedPath, useTranslations } from "../i18n/utils";
 
 const currentPath = Astro.url.pathname;
+
+const lang = getLang(Astro.params.lang);
+const t = useTranslations(lang);
+
+const navigation = [
+	{ label: t("nav.home"), href: getLocalizedPath(lang, "/") },
+	{ label: t("nav.categories"), href: getLocalizedPath(lang, "/categories") },
+	{ label: "Source", href: GITHUB_BLOG_URL, external: true },
+	{ label: "RSS", href: getLocalizedPath(lang, "/rss") },
+	{ label: t("nav.about"), href: getLocalizedPath(lang, "/about") },
+	{ label: "Github", href: GITHUB_URL, external: true },
+];
 ---
 
 <header>

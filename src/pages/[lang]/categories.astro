@@ -1,24 +1,42 @@
 ---
-import TypeWriter from "../components/TypeWriter.astro";
-import BaseLayout from "../layouts/BaseLayout.astro";
-import { getAllTags } from "../lib/posts";
+import TypeWriter from "../../components/TypeWriter.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getAllTags } from "../../lib/posts";
+import { getLang, getLocalizedPath } from "../../i18n/utils";
+import { locales } from "../../i18n/config";
 
-const tags = await getAllTags();
+export function getStaticPaths() {
+	const params = locales.map((local) => {
+		return { params: { lang: local } };
+	});
+	return params;
+}
+
+const lang = getLang(Astro.params.lang);
+
+const tags = await getAllTags({ lang });
 ---
 
 <BaseLayout>
 	<div class="content-wrapper">
-		<TypeWriter id="typewriter" text="ls -la ~/blog/categories" revealTarget="#content" />
+		<TypeWriter
+			id="typewriter"
+			text="ls -la ~/blog/categories"
+			revealTarget="#content"
+		/>
 
 		<div id="content" class="content fade hidden">
 			<ul>
 				{
 					tags.map((tag) => (
 						<li>
-							<a class="category" href=`/categories/${tag.name}`>
-							<span>drwxr-xr-x</span>
-							<span>{tag.name}/</span>
-							<span>({tag.count})</span>
+							<a
+								class="category"
+								href={getLocalizedPath(lang, `/categories/${tag.name}`)}
+							>
+								<span>drwxr-xr-x</span>
+								<span>{tag.name}/</span>
+								<span>({tag.count})</span>
 							</a>
 						</li>
 					))

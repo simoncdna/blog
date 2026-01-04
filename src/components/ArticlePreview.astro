@@ -1,4 +1,6 @@
 ---
+import { getLang, getLocalizedPath } from "../i18n/utils";
+
 interface Props {
 	id: number;
 	title: string;
@@ -11,10 +13,13 @@ interface Props {
 
 const { id, title, description, path, creationDate, readingTime, tags } =
 	Astro.props;
+
+const lang = getLang(Astro.params.lang);
+const postURL = getLocalizedPath(lang, `/posts/${id}`);
 ---
 
 <article>
-	<a class="post" href={`/posts/${id}`}>
+	<a class="post" href={postURL}>
 		<span class="path">{path}</span>
 
 		<div class="additionnal-infos">
