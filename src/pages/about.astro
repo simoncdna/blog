@@ -112,8 +112,33 @@ const socials = [
 		display: flex;
 	}
 
-	.project:not(:last-child)::after {
+	.project:not(:first-child)::before {
 		content: "•";
-		margin-left: 8px;
+		margin-right: 8px;
+	}
+
+	/* Desktop LG */
+	@media (max-width: 1024px) {
+		.info {
+			font-size: 14px;
+		}
+	}
+
+	/* Desktop MD */
+	@media (max-width: 768px) {
+		.info-list {
+			max-width: 100%;
+		}
+		.info {
+			font-size: 14px;
+		}
+		.projects-list {
+			flex-wrap: wrap;
+			gap: 4px;
+		}
+		.project:not(:first-child)::before {
+			content: "•";
+			margin-right: 4px;
+		}
 	}
 </style>

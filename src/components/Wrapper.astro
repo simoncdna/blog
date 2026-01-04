@@ -17,7 +17,21 @@ import Footer from "../components/Footer.astro";
 		align-items: start;
 		width: 100%;
 		min-height: 100vh;
-		padding: 72px 280px;
+		padding: 72px clamp(20px, 15%, 280px);
 		gap: 96px;
+	}
+
+	/* Desktop XL */
+	@media (max-width: 1200px) {
+		.wrapper {
+			padding: 72px clamp(24px, 15%, 100px);
+		}
+	}
+
+	/* Desktop LG */
+	@media (max-width: 1024px) {
+		.wrapper {
+			padding: 24px clamp(12px, 5%, 32px);
+		}
 	}
 </style>

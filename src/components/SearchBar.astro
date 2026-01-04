@@ -3,7 +3,7 @@
 ---
 
 <label for="search-input" class="input-wrapper">
-	<span>$ find posts --search </span>
+	<span class="search-cmd">$ find posts --search </span>
 	<input id="search-input" type="search" />
 </label>
 
@@ -29,6 +29,10 @@
 		transition: all 0.15s ease;
 	}
 
+	.search-cmd {
+		text-wrap: nowrap;
+	}
+
 	input {
 		background-color: transparent;
 		border: none;
@@ -43,5 +47,12 @@
 	input:focus {
 		color: var(--color-white);
 		transition: all 0.15s ease;
+	}
+
+	/* Desktop MD */
+	@media (max-width: 768px) {
+		.input-wrapper {
+			width: 100%;
+		}
 	}
 </style>

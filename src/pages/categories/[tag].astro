@@ -65,8 +65,10 @@ const secondDelay = firstText.length * ANIMATION_TYPING_SPEED + MARGIN;
 						<li>
 							<a class="terminal-row" href={`/posts/${post.data.id}`}>
 								<span>-rw-r--r--</span>
-								<span>{getFormattedDate(post.data.creationDate)}</span>
-								<span>{post.data.title}.md</span>
+								<span class="file-date">
+									{getFormattedDate(post.data.creationDate)}
+								</span>
+								<span>{post.id}.md</span>
 							</a>
 						</li>
 					))
@@ -128,5 +130,20 @@ const secondDelay = firstText.length * ANIMATION_TYPING_SPEED + MARGIN;
 
 	:global(#typewriter-2.hidden) {
 		display: none;
+	}
+
+	/* Desktop LG */
+	@media (max-width: 1024px) {
+		.content,
+		.command {
+			font-size: 14px;
+		}
+	}
+
+	/* Desktop MD */
+	@media (max-width: 768px) {
+		.terminal-row {
+			grid-template-columns: auto 1fr auto;
+		}
 	}
 </style>
