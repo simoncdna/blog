@@ -28,7 +28,7 @@ const { Content } = await render(post);
 
 <PostLayout>
 	<div class="content-wrapper">
-		<Header title={post.data.title} />
+		<Header fileName={post.id} />
 		<Frontmatter
 			date={getFormattedDate(post.data.creationDate)}
 			readingTime={getReadingTime(post.body)}
@@ -41,16 +41,12 @@ const { Content } = await render(post);
 		<Footer>
 			{
 				prevPost ? (
-					<FooterItem id={prevPost.data.id} title={prevPost.data.title} />
+					<FooterItem id={prevPost.data.id} fileName={prevPost.id} />
 				) : (
 					<span />
 				)
 			}
-			{
-				nextPost && (
-					<FooterItem id={nextPost.data.id} title={nextPost.data.title} />
-				)
-			}
+			{nextPost && <FooterItem id={nextPost.data.id} fileName={nextPost.id} />}
 		</Footer>
 	</div>
 </PostLayout>
