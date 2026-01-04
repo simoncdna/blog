@@ -1,8 +1,8 @@
 import readingTime from "reading-time";
 
 /**
- * Calculates estimated reading time for article content.
- * @param body - Article body text
+ * Calculates estimated reading time for post content.
+ * @param body - Post body text
  * @returns Reading time string prefixed with "~", or "-" if no content
  */
 export function getReadingTime(body: string | undefined): string {

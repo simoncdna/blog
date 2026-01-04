@@ -1,8 +1,8 @@
 ---
-import ArticlePreview from "../../components/ArticlePreview.astro";
+import PostPreview from "../../components/PostPreview.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
-import { getArticlePath } from "../../lib/getArticlePath";
+import { getPostPath } from "../../lib/getPostPath";
 import { getFormattedDate } from "../../lib/getFormattedDate";
 
 import { getAllPosts } from "../../lib/posts";
@@ -29,16 +29,16 @@ const posts = await getAllPosts({ lang });
 	<div class="content">
 		<SearchBar />
 
-		<ul class="articles">
+		<ul class="posts">
 			{
 				posts.length > 1 ? (
 					posts.map(({ data, body }) => (
 						<li>
-							<ArticlePreview
+							<PostPreview
 								id={data.id}
 								title={data.title}
 								description={data.description}
-								path={getArticlePath(data.id)}
+								path={getPostPath(data.id)}
 								creationDate={getFormattedDate(data.creationDate)}
 								readingTime={getReadingTime(body)}
 								tags={data.tags}
@@ -62,7 +62,7 @@ const posts = await getAllPosts({ lang });
 		width: 100%;
 	}
 
-	.articles {
+	.posts {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
 		gap: 20px;
@@ -70,7 +70,7 @@ const posts = await getAllPosts({ lang });
 
 	/* Desktop MD */
 	@media (max-width: 768px) {
-		.articles {
+		.posts {
 			grid-template-columns: repeat(1, 1fr);
 		}
 	}
