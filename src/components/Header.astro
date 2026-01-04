@@ -2,6 +2,7 @@
 import Logo from "/public/logo_blog.svg?raw";
 import { GITHUB_URL, GITHUB_BLOG_URL } from "../constants.ts";
 import { getLang, getLocalizedPath, useTranslations } from "../i18n/utils";
+import { handleIsActive } from "../lib/handleIsActive";
 
 const currentPath = Astro.url.pathname;
 
@@ -28,7 +29,9 @@ const navigation = [
 						<a
 							href={nav.href}
 							target={nav.external ? "_blank" : undefined}
-							class={currentPath === nav.href ? "active" : ""}
+							class={
+								handleIsActive(currentPath, nav.href, lang) ? "active" : ""
+							}
 						>
 							{nav.label}
 						</a>
