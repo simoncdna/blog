@@ -2,20 +2,20 @@
 import TypeWriter from "../../components/TypeWriter.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getAllTags } from "../../lib/posts";
-import { getLang, getLocalizedPath, useTranslations } from "../../i18n/utils";
+import { getLocale, getLocalizedPath, useTranslations } from "../../i18n/utils";
 import { locales } from "../../i18n/config";
 
 export function getStaticPaths() {
-	const params = locales.map((local) => {
-		return { params: { lang: local } };
+	const params = locales.map((locale) => {
+		return { params: { locale } };
 	});
 	return params;
 }
 
-const lang = getLang(Astro.params.lang);
-const t = useTranslations(lang);
+const locale = getLocale(Astro.params.locale);
+const t = useTranslations(locale);
 
-const tags = await getAllTags({ lang });
+const tags = await getAllTags({ locale });
 ---
 
 <BaseLayout title={t("nav.categories")}>
@@ -33,7 +33,7 @@ const tags = await getAllTags({ lang });
 						<li>
 							<a
 								class="category"
-								href={getLocalizedPath(lang, `/categories/${tag.name}`)}
+								href={getLocalizedPath(locale, `/categories/${tag.name}`)}
 							>
 								<span>drwxr-xr-x</span>
 								<span>{tag.name}/</span>

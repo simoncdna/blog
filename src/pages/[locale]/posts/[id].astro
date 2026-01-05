@@ -13,11 +13,11 @@ import { getPostSlug } from "../../../i18n/utils";
 
 export async function getStaticPaths() {
 	const params = await Promise.all(
-		locales.map(async (lang) => {
-			const posts = await getAllPosts({ lang });
+		locales.map(async (locale) => {
+			const posts = await getAllPosts({ locale });
 
 			return posts.map((post, index) => ({
-				params: { lang, id: post.data.id },
+				params: { locale, id: post.data.id },
 				props: {
 					post,
 					prevPost: posts[index + 1] ?? null,
@@ -31,14 +31,14 @@ export async function getStaticPaths() {
 }
 
 const { post, prevPost, nextPost } = Astro.props;
-const { lang } = Astro.params;
+const { locale } = Astro.params;
 
 const { Content } = await render(post);
 ---
 
 <PostLayout title={post.data.title} description={post.data.description}>
 	<div class="content-wrapper">
-		<Header fileName={getPostSlug(post.id, lang)} />
+		<Header fileName={getPostSlug(post.id, locale)} />
 		<Frontmatter
 			date={getFormattedDate(post.data.creationDate)}
 			readingTime={getReadingTime(post.body)}
@@ -53,7 +53,7 @@ const { Content } = await render(post);
 				prevPost ? (
 					<FooterItem
 						id={prevPost.data.id}
-						fileName={getPostSlug(prevPost.id, lang)}
+						fileName={getPostSlug(prevPost.id, locale)}
 					/>
 				) : (
 					<span />
@@ -63,7 +63,7 @@ const { Content } = await render(post);
 				nextPost && (
 					<FooterItem
 						id={nextPost.data.id}
-						fileName={getPostSlug(nextPost.id, lang)}
+						fileName={getPostSlug(nextPost.id, locale)}
 					/>
 				)
 			}

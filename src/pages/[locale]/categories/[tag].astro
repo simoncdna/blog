@@ -5,16 +5,16 @@ import { getAllTags, getPostsByTag } from "../../../lib/posts";
 import TypeWriter from "../../../components/TypeWriter.astro";
 
 import { ANIMATION_TYPING_SPEED } from "../../../constants";
-import { getLang, getLocalizedPath, getPostSlug } from "../../../i18n/utils";
+import { getLocale, getLocalizedPath, getPostSlug } from "../../../i18n/utils";
 import { locales } from "../../../i18n/config";
 
 export async function getStaticPaths() {
 	const params = await Promise.all(
-		locales.map(async (lang) => {
-			const tags = await getAllTags({ lang });
+		locales.map(async (locale) => {
+			const tags = await getAllTags({ locale });
 
 			return tags.map((tag) => ({
-				params: { lang, tag: tag.name },
+				params: { locale, tag: tag.name },
 			}));
 		}),
 	);
@@ -23,10 +23,10 @@ export async function getStaticPaths() {
 }
 
 const { tag: currentTag } = Astro.params;
-const lang = getLang(Astro.params.lang);
+const locale = getLocale(Astro.params.locale);
 
-const tags = await getAllTags({ lang });
-const posts = await getPostsByTag(currentTag, { lang });
+const tags = await getAllTags({ locale });
+const posts = await getPostsByTag(currentTag, { locale });
 
 const MARGIN = 400;
 const firstText = `cd ${currentTag}/`;
@@ -47,7 +47,7 @@ const secondDelay = firstText.length * ANIMATION_TYPING_SPEED + MARGIN;
 									"terminal-row",
 									{ "is-active": tag.name === currentTag },
 								]}
-								href={getLocalizedPath(lang, `/categories/${tag.name}`)}
+								href={getLocalizedPath(locale, `/categories/${tag.name}`)}
 							>
 								<span>drwxr-xr-x</span>
 								<span>{tag.name}/</span>
@@ -75,13 +75,13 @@ const secondDelay = firstText.length * ANIMATION_TYPING_SPEED + MARGIN;
 						<li>
 							<a
 								class="terminal-row"
-								href={getLocalizedPath(lang, `/posts/${post.data.id}`)}
+								href={getLocalizedPath(locale, `/posts/${post.data.id}`)}
 							>
 								<span>-rw-r--r--</span>
 								<span class="file-date">
 									{getFormattedDate(post.data.creationDate)}
 								</span>
-								<span>{getPostSlug(post.id, lang)}.md</span>
+								<span>{getPostSlug(post.id, locale)}.md</span>
 							</a>
 						</li>
 					))

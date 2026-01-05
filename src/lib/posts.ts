@@ -1,22 +1,22 @@
 import { getCollection } from "astro:content";
-import { defaultLang, type Lang } from "../i18n/config";
+import { defaultLocale, type Locale } from "../i18n/config";
 
 type PostsOptions = {
-  lang: Lang;
+  locale: Locale;
   withDraft?: boolean;
 };
 
 /**
- * @param options.lang - Corrent lang posts (default: defaultLang)
+ * @param options.locale - Current locale posts (default: defaultLocale)
  * @param options.withDraft - Include draft posts (default: false)
  */
 export async function getAllPosts(
-  options: PostsOptions = { lang: defaultLang },
+  options: PostsOptions = { locale: defaultLocale },
 ) {
   const posts = await getCollection("posts", ({ data, id }) => {
-    const matchesLang = id.startsWith(`${options.lang}/`);
+    const matchesLocale = id.startsWith(`${options.locale}/`);
     const matchesDraftOption = options.withDraft || !data.draft;
-    return matchesLang && matchesDraftOption;
+    return matchesLocale && matchesDraftOption;
   });
 
   return posts.sort(
@@ -31,7 +31,7 @@ type Tag = { name: string; count: number };
  * @param options.withDraft - Include draft posts (default: false)
  */
 export async function getAllTags(
-  options: PostsOptions = { lang: defaultLang },
+  options: PostsOptions = { locale: defaultLocale },
 ): Promise<Tag[]> {
   const posts = await getAllPosts(options);
   const tagsMap = new Map<string, number>();
@@ -53,14 +53,14 @@ export async function getAllTags(
  */
 export async function getPostsByTag(
   tag: string,
-  options: PostsOptions = { lang: defaultLang },
+  options: PostsOptions = { locale: defaultLocale },
 ) {
   const posts = await getCollection("posts", ({ data, id }) => {
-    const matchesLang = id.startsWith(`${options.lang}/`);
+    const matchesLocale = id.startsWith(`${options.locale}/`);
     const matchesTag = data.tags.includes(tag);
     const matchesDraft = options.withDraft || !data.draft;
 
-    return matchesTag && matchesDraft && matchesLang;
+    return matchesTag && matchesDraft && matchesLocale;
   });
 
   return posts;

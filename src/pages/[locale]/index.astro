@@ -9,20 +9,20 @@ import { getAllPosts } from "../../lib/posts";
 import { getReadingTime } from "../../lib/getReadingTime";
 
 import SearchBar from "../../components/SearchBar.astro";
-import { getLang, useTranslations } from "../../i18n/utils";
+import { getLocale, useTranslations } from "../../i18n/utils";
 import { locales } from "../../i18n/config";
 
 export function getStaticPaths() {
-	const params = locales.map((local) => {
-		return { params: { lang: local } };
+	const params = locales.map((locale) => {
+		return { params: { locale } };
 	});
 	return params;
 }
 
-const lang = getLang(Astro.params.lang);
-const t = useTranslations(lang);
+const locale = getLocale(Astro.params.locale);
+const t = useTranslations(locale);
 
-const posts = await getAllPosts({ lang });
+const posts = await getAllPosts({ locale });
 ---
 
 <BaseLayout title={t("nav.home")}>

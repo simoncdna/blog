@@ -1,21 +1,21 @@
 ---
 import Logo from "/public/logo_blog.svg?raw";
 import { GITHUB_URL, GITHUB_BLOG_URL } from "../constants.ts";
-import { getLang, getLocalizedPath, useTranslations } from "../i18n/utils";
+import { getLocale, getLocalizedPath, useTranslations } from "../i18n/utils";
 import { handleIsActive } from "../lib/handleIsActive";
 import LocalToggle from "./LocalToggle.astro";
 
 const currentPath = Astro.url.pathname;
 
-const lang = getLang(Astro.params.lang);
-const t = useTranslations(lang);
+const locale = getLocale(Astro.params.locale);
+const t = useTranslations(locale);
 
 const navigation = [
-	{ label: t("nav.home"), href: getLocalizedPath(lang, "/") },
-	{ label: t("nav.categories"), href: getLocalizedPath(lang, "/categories") },
+	{ label: t("nav.home"), href: getLocalizedPath(locale, "/") },
+	{ label: t("nav.categories"), href: getLocalizedPath(locale, "/categories") },
 	{ label: "Source", href: GITHUB_BLOG_URL, external: true },
-	{ label: "RSS", href: getLocalizedPath(lang, "/rss") },
-	{ label: t("nav.about"), href: getLocalizedPath(lang, "/about") },
+	{ label: "RSS", href: getLocalizedPath(locale, "/rss") },
+	{ label: t("nav.about"), href: getLocalizedPath(locale, "/about") },
 	{ label: "Github", href: GITHUB_URL, external: true },
 ];
 ---
@@ -33,7 +33,7 @@ const navigation = [
 								href={nav.href}
 								target={nav.external ? "_blank" : undefined}
 								class={
-									handleIsActive(currentPath, nav.href, lang) ? "active" : ""
+									handleIsActive(currentPath, nav.href, locale) ? "active" : ""
 								}
 							>
 								{nav.label}

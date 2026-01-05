@@ -1,21 +1,21 @@
 ---
-import { getLang } from "../i18n/utils";
+import { getLocale } from "../i18n/utils";
 
-const lang = getLang(Astro.params.lang);
-const pathWithoutLang = Astro.url.pathname.replace(/^\/(en|fr)/, "");
+const locale = getLocale(Astro.params.locale);
+const pathWithoutLocale = Astro.url.pathname.replace(/^\/(en|fr)/, "");
 ---
 
 <div class="local-toggle-wrapper">
 	<a
-		href={`/en${pathWithoutLang}`}
-		class:list={["local-toggle", { active: lang === "en" }]}
+		href={`/en${pathWithoutLocale}`}
+		class:list={["local-toggle", { active: locale === "en" }]}
 	>
 		EN
 	</a>
 	<span class="local-toggle-separator">/</span>
 	<a
-		href={`/fr${pathWithoutLang}`}
-		class:list={["local-toggle", { active: lang === "fr" }]}
+		href={`/fr${pathWithoutLocale}`}
+		class:list={["local-toggle", { active: locale === "fr" }]}
 	>
 		FR
 	</a>

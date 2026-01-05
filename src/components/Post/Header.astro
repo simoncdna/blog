@@ -1,5 +1,5 @@
 ---
-import { getLang, getLocalizedPath } from "../../i18n/utils";
+import { getLocale, getLocalizedPath } from "../../i18n/utils";
 
 interface Props {
 	fileName: string;
@@ -7,8 +7,8 @@ interface Props {
 
 const { fileName } = Astro.props;
 
-const lang = getLang(Astro.params.lang);
-const linkURL = getLocalizedPath(lang, "/");
+const locale = getLocale(Astro.params.locale);
+const linkURL = getLocalizedPath(locale, "/");
 ---
 
 <header class="header">

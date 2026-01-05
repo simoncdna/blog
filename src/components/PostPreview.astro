@@ -1,5 +1,5 @@
 ---
-import { getLang, getLocalizedPath } from "../i18n/utils";
+import { getLocale, getLocalizedPath } from "../i18n/utils";
 
 interface Props {
 	id: number;
@@ -14,8 +14,8 @@ interface Props {
 const { id, title, description, path, creationDate, readingTime, tags } =
 	Astro.props;
 
-const lang = getLang(Astro.params.lang);
-const postURL = getLocalizedPath(lang, `/posts/${id}`);
+const locale = getLocale(Astro.params.locale);
+const postURL = getLocalizedPath(locale, `/posts/${id}`);
 ---
 
 <article>
