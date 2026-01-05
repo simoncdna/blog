@@ -3,6 +3,7 @@ import Logo from "/public/logo_blog.svg?raw";
 import { GITHUB_URL, GITHUB_BLOG_URL } from "../constants.ts";
 import { getLang, getLocalizedPath, useTranslations } from "../i18n/utils";
 import { handleIsActive } from "../lib/handleIsActive";
+import LocalToggle from "./LocalToggle.astro";
 
 const currentPath = Astro.url.pathname;
 
@@ -21,25 +22,28 @@ const navigation = [
 
 <header>
 	<div class="logo" set:html={Logo} />
-	<nav>
-		<ul>
-			{
-				navigation.map((nav) => (
-					<li>
-						<a
-							href={nav.href}
-							target={nav.external ? "_blank" : undefined}
-							class={
-								handleIsActive(currentPath, nav.href, lang) ? "active" : ""
-							}
-						>
-							{nav.label}
-						</a>
-					</li>
-				))
-			}
-		</ul>
-	</nav>
+	<div class="header-right">
+		<LocalToggle />
+		<nav>
+			<ul>
+				{
+					navigation.map((nav) => (
+						<li>
+							<a
+								href={nav.href}
+								target={nav.external ? "_blank" : undefined}
+								class={
+									handleIsActive(currentPath, nav.href, lang) ? "active" : ""
+								}
+							>
+								{nav.label}
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</nav>
+	</div>
 </header>
 
 <style>
@@ -49,6 +53,15 @@ const navigation = [
 		justify-content: space-between;
 		align-items: end;
 		width: 100%;
+		height: 100%;
+	}
+
+	.header-right {
+		align-self: stretch;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		gap: 24px;
 	}
 
 	.logo {
