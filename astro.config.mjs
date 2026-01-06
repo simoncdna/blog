@@ -1,13 +1,16 @@
 // @ts-check
 import pagefind from "astro-pagefind";
 import { defineConfig } from "astro/config";
-import { defaultLang, locales } from "./src/i18n/config";
+import { defaultLocale, locales } from "./src/i18n/config";
+
+import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [pagefind()],
+  site: "https://blog.simoncardona.com",
+  integrations: [pagefind(), sitemap()],
   i18n: {
-    defaultLocale: defaultLang,
+    defaultLocale: defaultLocale,
     locales: [...locales],
     routing: {
       prefixDefaultLocale: true,
