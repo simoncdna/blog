@@ -7,7 +7,7 @@ import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://blog.simoncardona.com",
+  site: "https://blog.simoncdna.dev",
   integrations: [pagefind(), sitemap()],
   i18n: {
     defaultLocale: defaultLocale,
@@ -18,3 +18,4 @@ export default defineConfig({
     },
   },
 });
+
