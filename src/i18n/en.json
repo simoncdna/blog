@@ -4,5 +4,7 @@
   "nav.about": "About",
   "home.posts.empty": "No posts found.",
   "about.info.role": "Frontend Developer",
-  "about.info.description": "Terminal enthusiast. As my co-workers say, I'm a curious frontend dev — I love exploring things beyond my job tasks."
+  "about.info.description": "Terminal enthusiast. As my co-workers say, I'm a curious frontend dev — I love exploring things beyond my job tasks.",
+  "rss.title": "Simon Cardona Blog",
+  "rss.description": "Programming - Linux - Rust - JavaScript - Productivity - Thoughts"
 }
