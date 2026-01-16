@@ -27,8 +27,6 @@ const posts = await getAllPosts({ locale });
 
 <BaseLayout title={t("nav.home")}>
 	<div class="content">
-		<SearchBar />
-
 		<ul class="posts">
 			{
 				posts.length > 1 ? (
