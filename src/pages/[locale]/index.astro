@@ -11,6 +11,7 @@ import { getReadingTime } from "../../lib/getReadingTime";
 import SearchBar from "../../components/SearchBar.astro";
 import { getLocale, useTranslations } from "../../i18n/utils";
 import { locales } from "../../i18n/config";
+import TypeWriter from "../../components/TypeWriter.astro";
 
 export function getStaticPaths() {
 	const params = locales.map((locale) => {
@@ -26,38 +27,49 @@ const posts = await getAllPosts({ locale });
 ---
 
 <BaseLayout title={t("nav.home")}>
-	<div class="content">
-		<ul class="posts">
-			{
-				posts.length > 1 ? (
-					posts.map(({ data, body }) => (
-						<li>
-							<PostPreview
-								id={data.id}
-								title={data.title}
-								description={data.description}
-								path={getPostPath(data.id)}
-								creationDate={getFormattedDate(data.creationDate)}
-								readingTime={getReadingTime(body)}
-								tags={data.tags}
-							/>
-						</li>
-					))
-				) : (
-					<span>{t("home.posts.empty")}</span>
-				)
-			}
-		</ul>
+	<div class="content-wrapper">
+		<TypeWriter
+			id="typewriter"
+			text="ls -la ~/blog/posts"
+			revealTarget="#content"
+		/>
+
+		<div id="content" class="content fade hidden">
+			<ul class="posts">
+				{
+					posts.length > 1 ? (
+						posts.map(({ data, body }) => (
+							<li>
+								<PostPreview
+									id={data.id}
+									title={data.title}
+									description={data.description}
+									path={getPostPath(data.id)}
+									creationDate={getFormattedDate(data.creationDate)}
+									readingTime={getReadingTime(body)}
+									tags={data.tags}
+								/>
+							</li>
+						))
+					) : (
+						<span>{t("home.posts.empty")}</span>
+					)
+				}
+			</ul>
+		</div>
 	</div>
 </BaseLayout>
 
 <style>
-	.content {
+	.content,
+	.content-wrapper {
 		display: flex;
 		flex-direction: column;
-		gap: 24px;
-		flex: 1;
+		justify-content: start;
+		align-items: start;
 		width: 100%;
+		gap: 32px;
+		flex: 1;
 	}
 
 	.posts {
